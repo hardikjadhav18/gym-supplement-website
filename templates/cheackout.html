@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Checkout - Gym Supplement Store</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        .checkout-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .checkout-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .checkout-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .order-total {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .place-order {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order:hover {
+            background: #333;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #111;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>💪 GYM SUPPLEMENT STORE</h1>
+
+    <p>
+        Fuel Your Fitness. Build Your Strength.
+    </p>
+
+    <nav>
+
+        <a href="/">🏠 Home</a>
+
+        <a href="/cart">🛒 Cart</a>
+
+        <a href="/dashboard">📊 Dashboard</a>
+
+        <a href="/admin">🔐 Admin</a>
+
+    </nav>
+
+</header>
+
+
+<div class="checkout-container">
+
+    <h2>
+        💳 Checkout
+    </h2>
+
+
+    <div class="checkout-box">
+
+        <h3>
+            👤 Customer Details
+        </h3>
+
+
+        <form
+            action="{{ url_for('checkout') }}"
+            method="POST"
+        >
+
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                name="customer_name"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                name="customer_mobile"
+                placeholder="Enter 10 digit mobile number"
+                maxlength="10"
+                required
+            >
+
+
+            <label>
+                Delivery Address
+            </label>
+
+            <textarea
+                name="customer_address"
+                placeholder="Enter complete delivery address"
+                required
+            ></textarea>
+
+
+            <div class="order-total">
+
+                Total Amount:
+                ₹{{ "%.2f"|format(total) }}
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order"
+            >
+                🛍️ Place Order
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="/cart"
+            class="back"
+        >
+            ← Back to Cart
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

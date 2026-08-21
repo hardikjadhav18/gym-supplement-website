@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Gym Supplement Store</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER WITH GYM IMAGE
+     ===================================================== -->
+
+<header class="main-header">
+
+    <div class="header-overlay">
+
+        <h1>
+            💪 GYM SUPPLEMENT STORE
+        </h1>
+
+        <p>
+            Fuel Your Fitness. Build Your Strength.
+        </p>
+
+
+        <nav>
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+            <a href="{{ url_for('cart') }}">
+                🛒 Cart
+            </a>
+
+            <a href="{{ url_for('dashboard') }}">
+                📊 Dashboard
+            </a>
+
+            <a href="{{ url_for('admin') }}">
+                🔐 Admin
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN CONTAINER
+     ===================================================== -->
+
+<div class="container">
+
+
+    <!-- =================================================
+         HERO SECTION
+         ================================================= -->
+
+    <section class="hero">
+
+        <h2>
+            💪 BUILD YOUR BEST VERSION
+        </h2>
+
+        <p>
+            Premium gym supplements for
+            strength, recovery and performance.
+        </p>
+
+
+        <a href="#products">
+
+            <button class="cart-button">
+                🛒 Shop Supplements
+            </button>
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRODUCTS SECTION
+         ================================================= -->
+
+    <section id="products">
+
+        <h2>
+            🥤 Our Gym Supplements
+        </h2>
+
+
+
+        <!-- SEARCH -->
+
+        <form
+            action="{{ url_for('home') }}"
+            method="GET"
+            class="search-form"
+        >
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search supplements..."
+                value="{{ search }}"
+            >
+
+            <button type="submit">
+                🔍 Search
+            </button>
+
+        </form>
+
+
+
+        <!-- =================================================
+             CATEGORIES
+             ================================================= -->
+
+        <div class="categories">
+
+            <a href="/">
+                All
+            </a>
+
+            <a href="/?search=Whey">
+                🥛 Protein
+            </a>
+
+            <a href="/?search=Creatine">
+                ⚡ Creatine
+            </a>
+
+            <a href="/?search=Pre Workout">
+                🔥 Pre-Workout
+            </a>
+
+            <a href="/?search=BCAA">
+                💪 BCAA
+            </a>
+
+            <a href="/?search=Mass Gainer">
+                🏋️ Mass Gainer
+            </a>
+
+            <a href="/?search=Glutamine">
+                🧪 Glutamine
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCTS
+             ================================================= -->
+
+        <div class="products">
+
+
+            {% if products %}
+
+
+                {% for product in products %}
+
+
+                <div class="card">
+
+
+                    <!-- PRODUCT NAME -->
+
+                    <h3>
+                        {{ product["name"] }}
+                    </h3>
+
+
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <div class="product-image">
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='images/' + product['image']
+                            ) }}"
+                            alt="{{ product['name'] }}"
+                        >
+
+                    </div>
+
+
+
+                    <!-- DESCRIPTION -->
+
+                    <p>
+                        {{ product["description"] }}
+                    </p>
+
+
+
+                    <!-- PRICE -->
+
+                    <div class="price">
+
+                        ₹{{ "%.2f"|format(product["price"]) }}
+
+                    </div>
+
+
+
+                    <!-- STOCK -->
+
+                    <p class="stock">
+
+                        {% if product["stock"] > 0 %}
+
+                            Stock Available:
+                            <strong>
+                                {{ product["stock"] }}
+                            </strong>
+
+                        {% else %}
+
+                            <strong>
+                                ❌ Out of Stock
+                            </strong>
+
+                        {% endif %}
+
+                    </p>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="product-buttons">
+
+
+                        <!-- VIEW PRODUCT -->
+
+                        <a
+                            href="{{ url_for(
+                                'product_details',
+                                product_id=product['id']
+                            ) }}"
+                        >
+
+                            <button
+                                type="button"
+                                class="view-button"
+                            >
+                                👁 View
+                            </button>
+
+                        </a>
+
+
+
+                        <!-- ADD TO CART -->
+
+                        {% if product["stock"] > 0 %}
+
+                            <a
+                                href="{{ url_for(
+                                    'add_to_cart',
+                                    product_id=product['id']
+                                ) }}"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="cart-button"
+                                >
+                                    🛒 Add to Cart
+                                </button>
+
+                            </a>
+
+                        {% else %}
+
+                            <button
+                                type="button"
+                                class="cart-button"
+                                disabled
+                            >
+                                ❌ Out of Stock
+                            </button>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <!-- =================================================
+                     NO PRODUCTS
+                     ================================================= -->
+
+                <div class="empty-products">
+
+                    <h2>
+                        😔 No Products Found
+                    </h2>
+
+                    <p>
+                        Try searching for another supplement.
+                    </p>
+
+
+                    <a href="/">
+
+                        <button class="cart-button">
+                            View All Products
+                        </button>
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         WHY CHOOSE US
+         ================================================= -->
+
+    <section class="why-us">
+
+        <h2>
+            💪 Why Choose Our Store?
+        </h2>
+
+
+        <div class="features">
+
+
+            <!-- QUALITY -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🥇
+                </div>
+
+                <h3>
+                    Quality Products
+                </h3>
+
+                <p>
+                    Carefully selected supplements
+                    for your fitness journey.
+                </p>
+
+            </div>
+
+
+
+            <!-- DELIVERY -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🚚
+                </div>
+
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Get your supplements delivered
+                    quickly and safely.
+                </p>
+
+            </div>
+
+
+
+            <!-- PRICE -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💰
+                </div>
+
+                <h3>
+                    Best Prices
+                </h3>
+
+                <p>
+                    Affordable supplements
+                    for every fitness goal.
+                </p>
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    Secure Shopping
+                </h3>
+
+                <p>
+                    Your customer information
+                    is handled securely.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ABOUT US
+         ================================================= -->
+
+    <section
+        class="about-us"
+        style="
+            display:block !important;
+            visibility:visible !important;
+        "
+    >
+
+        <h2
+            style="
+                display:block !important;
+                visibility:visible !important;
+            "
+        >
+            🏋️ About Gym Supplement Store
+        </h2>
+
+
+        <p
+            style="
+                display:block !important;
+                visibility:visible !important;
+            "
+        >
+
+            Welcome to our Gym Supplement Store.
+
+            We provide a range of fitness supplements
+            including Whey Protein, Creatine, BCAA,
+            Pre Workout, Mass Gainer and Glutamine.
+
+        </p>
+
+
+        <p
+            style="
+                display:block !important;
+                visibility:visible !important;
+            "
+        >
+
+            Our goal is to provide quality fitness products
+            at affordable prices and make your shopping
+            experience simple, easy and convenient.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONTACT US
+         ================================================= -->
+
+    <section class="contact-us">
+
+        <h2>
+            📞 Contact Us
+        </h2>
+
+
+        <div class="contact-details">
+
+
+            <div>
+
+                <h3>
+                    📱 Phone
+                </h3>
+
+                <p>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    📧 Email
+                </h3>
+
+                <p>
+                    gymsupplementstore@gmail.com
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    📍 Address
+                </h3>
+
+                <p>
+                    Maharashtra, India
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer>
+
+    <h3>
+        💪 Gym Supplement Store
+    </h3>
+
+    <p>
+        Quality supplements for your fitness journey.
+    </p>
+
+    <p>
+        Your fitness. Your strength. Your journey.
+    </p>
+
+    <p>
+        © 2026 Gym Supplement Store
+    </p>
+
+</footer>
+
+
+
+</body>
+
+</html>

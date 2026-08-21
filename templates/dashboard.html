@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Gym Supplement Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            background: #ff4d00;
+
+            color: white;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #e64300;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+            width: 92%;
+
+            max-width: 1200px;
+
+            margin: 35px auto;
+        }
+
+
+        /* =========================================
+           STAT CARDS
+        ========================================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+
+            color: #777;
+
+            font-size: 16px;
+        }
+
+        .stat-card .number {
+            margin-top: 10px;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #ff4d00;
+        }
+
+
+        /* =========================================
+           PRODUCT SALES
+        ========================================= */
+
+        .sales-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 30px;
+        }
+
+        .sales-card h2 {
+            margin-top: 0;
+        }
+
+        .product-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+        }
+
+        .product-table th,
+        .product-table td {
+            padding: 14px;
+
+            border-bottom: 1px solid #eee;
+
+            text-align: left;
+        }
+
+        .product-table th {
+            background: #111;
+
+            color: white;
+        }
+
+        .product-table tr:hover {
+            background: #f8f8f8;
+        }
+
+
+        /* =========================================
+           GRAPH CARDS
+        ========================================= */
+
+        .prediction-card {
+            background: white;
+
+            padding: 25px;
+
+            margin-top: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.10);
+        }
+
+        .prediction-card h2 {
+            margin-top: 0;
+
+            margin-bottom: 8px;
+        }
+
+        .prediction-subtitle {
+            color: #777;
+
+            margin-bottom: 25px;
+        }
+
+        .chart-container {
+            position: relative;
+
+            width: 100%;
+
+            height: 420px;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+            text-align: center;
+
+            color: #777;
+
+            padding: 30px;
+
+            margin-top: 40px;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .header {
+                padding: 18px;
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .product-table {
+                font-size: 14px;
+            }
+
+            .product-table th,
+            .product-table td {
+                padding: 10px;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<div class="header">
+
+    <h1>
+        🏋️ Gym Supplement Dashboard
+    </h1>
+
+    <a
+        href="/"
+        class="back-btn"
+    >
+        ← Back to Store
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- =========================================
+         STATISTICS
+    ========================================= -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Sales
+            </h3>
+
+            <div class="number">
+
+                ₹{{ "%.2f"|format(total_sales) }}
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Orders
+            </h3>
+
+            <div class="number">
+
+                {{ total_orders }}
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Customers
+            </h3>
+
+            <div class="number">
+
+                {{ total_customers }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         PRODUCT SALES TABLE
+    ========================================= -->
+
+    <div class="sales-card">
+
+        <h2>
+            📦 Product Sales
+        </h2>
+
+        <table class="product-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Product
+                    </th>
+
+                    <th>
+                        Units Sold
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for product in product_sales %}
+
+                <tr>
+
+                    <td>
+                        {{ product.name }}
+                    </td>
+
+                    <td>
+                        {{ product.units_sold }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="2">
+                        No sales data available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =========================================
+         GRAPH 1
+         ACTUAL PRODUCT SALES
+    ========================================= -->
+
+    <div class="prediction-card">
+
+        <h2>
+            📊 Actual Product Sales
+        </h2>
+
+        <p class="prediction-subtitle">
+
+            Actual units sold for each gym supplement.
+
+        </p>
+
+
+        <div class="chart-container">
+
+            <canvas
+                id="actualSalesChart">
+            </canvas>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         GRAPH 2
+         PREDICTED SALES MONEY
+    ========================================= -->
+
+    <div class="prediction-card">
+
+        <h2>
+            📈 Predicted Sales Revenue
+        </h2>
+
+        <p class="prediction-subtitle">
+
+            Estimated sales revenue for the next 30 days.
+
+        </p>
+
+
+        <div class="chart-container">
+
+            <canvas
+                id="predictionChart">
+            </canvas>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<div class="footer">
+
+    Gym Supplement Store
+    © 2026
+
+</div>
+
+
+
+<script>
+
+    /* =================================================
+       PRODUCT SALES DATA FROM FLASK
+    ================================================= */
+
+    const productSales =
+        {{ product_sales | tojson }};
+
+
+    const productNames =
+        productSales.map(
+            product => product.name
+        );
+
+
+    const unitsSold =
+        productSales.map(
+            product => product.units_sold
+        );
+
+
+
+    /* =================================================
+       GRAPH 1
+       ACTUAL PRODUCT SALES
+    ================================================= */
+
+    const actualCanvas =
+        document.getElementById(
+            "actualSalesChart"
+        );
+
+
+    if (actualCanvas) {
+
+        new Chart(
+
+            actualCanvas.getContext("2d"),
+
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: productNames,
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Units Sold",
+
+                            data:
+                                unitsSold,
+
+                            borderWidth:
+                                1
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
+
+                        },
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    return (
+                                        " Units Sold: "
+                                        +
+                                        context.raw
+                                    );
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Gym Supplements"
+
+                            }
+
+                        },
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Units Sold"
+
+                            },
+
+                            ticks: {
+
+                                precision: 0
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+
+    /* =================================================
+       PREDICTION DATA
+    ================================================= */
+
+    const predictionData =
+        {{ predicted_sales | tojson }};
+
+
+    const predictionDates =
+        predictionData.dates || [];
+
+
+    const predictionValues =
+        predictionData.predicted || [];
+
+
+
+    /* =================================================
+       GRAPH 2
+       PREDICTED SALES REVENUE
+    ================================================= */
+
+    const predictionCanvas =
+        document.getElementById(
+            "predictionChart"
+        );
+
+
+    if (predictionCanvas) {
+
+        new Chart(
+
+            predictionCanvas.getContext("2d"),
+
+            {
+
+                type: "line",
+
+                data: {
+
+                    labels:
+                        predictionDates,
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Predicted Sales (₹)",
+
+                            data:
+                                predictionValues,
+
+                            borderWidth:
+                                3,
+
+                            borderDash:
+                                [8, 5],
+
+                            tension:
+                                0.3,
+
+                            pointRadius:
+                                3,
+
+                            fill:
+                                false
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    interaction: {
+
+                        mode:
+                            "index",
+
+                        intersect:
+                            false
+
+                    },
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true,
+
+                            position:
+                                "top"
+
+                        },
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    return (
+                                        " Predicted: ₹"
+                                        +
+                                        Number(
+                                            context.raw
+                                        ).toFixed(2)
+                                    );
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Future Date"
+
+                            }
+
+                        },
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Predicted Revenue (₹)"
+
+                            },
+
+                            ticks: {
+
+                                callback:
+                                    function(value) {
+
+                                        return "₹" + value;
+
+                                    }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

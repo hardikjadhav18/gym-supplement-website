@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        {{ product["name"] }}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        💪 Gym Supplement Store
+    </h1>
+
+    <nav>
+
+        <a href="/">🏠 Home</a>
+
+        <a href="/cart">🛒 Cart</a>
+
+        <a href="/dashboard">📊 Dashboard</a>
+
+        <a href="/admin">🔐 Admin</a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="product-details">
+
+
+        <div class="product-image">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/' + product['image']
+                ) }}"
+                alt="{{ product['name'] }}"
+            >
+
+        </div>
+
+
+        <div class="product-information">
+
+            <h1>
+                {{ product["name"] }}
+            </h1>
+
+
+            <p>
+                {{ product["description"] }}
+            </p>
+
+
+            <h2 class="price">
+
+                ₹{{ "%.2f"|format(
+                    product["price"]
+                ) }}
+
+            </h2>
+
+
+            <p>
+                Stock Available:
+                <strong>
+                    {{ product["stock"] }}
+                </strong>
+            </p>
+
+
+            {% if product["stock"] > 0 %}
+
+            <a href="{{ url_for(
+                'add_to_cart',
+                product_id=product['id']
+            ) }}">
+
+                <button class="cart-button">
+                    🛒 Add to Cart
+                </button>
+
+            </a>
+
+            {% else %}
+
+            <button
+                class="cart-button"
+                disabled
+            >
+                ❌ Out of Stock
+            </button>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 Gym Supplement Store
+    </p>
+
+</footer>
+
+</body>
+
+</html>

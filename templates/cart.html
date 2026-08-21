@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart - Gym Supplement Store</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <style>
+
+        /* ================================
+           CART PAGE
+           ================================ */
+
+        .cart-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+
+        .cart-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .cart-title h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+
+        .cart-title p {
+            color: #777;
+        }
+
+
+        /* ================================
+           CART LAYOUT
+           ================================ */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+            align-items: start;
+        }
+
+
+        /* ================================
+           CART ITEMS
+           ================================ */
+
+        .cart-items {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .cart-product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+
+        .cart-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+
+        .cart-product-info {
+            flex: 1;
+        }
+
+
+        .cart-product-info h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+
+        .cart-product-info p {
+            margin: 4px 0;
+            color: #777;
+        }
+
+
+        .cart-price {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+        /* ================================
+           QUANTITY
+           ================================ */
+
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+        .quantity-box a {
+            text-decoration: none;
+        }
+
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .quantity-btn:hover {
+            background: #f2f2f2;
+        }
+
+
+        .quantity-number {
+            min-width: 28px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        /* ================================
+           REMOVE
+           ================================ */
+
+        .remove-btn {
+            text-decoration: none;
+            color: #e53935;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .remove-btn:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================================
+           ORDER SUMMARY
+           ================================ */
+
+        .order-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+        }
+
+
+        .order-summary h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            color: #555;
+        }
+
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding-top: 18px;
+            margin-top: 20px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+
+        .delivery-free {
+            color: green;
+            font-weight: bold;
+        }
+
+
+        /* ================================
+           CHECKOUT BUTTON
+           ================================ */
+
+        .checkout-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 9px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .checkout-btn:hover {
+            background: #333;
+        }
+
+
+        /* ================================
+           CLEAR CART
+           ================================ */
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+
+        .continue-shopping {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+
+        .clear-cart {
+            text-decoration: none;
+            color: #e53935;
+            font-weight: 600;
+        }
+
+
+        /* ================================
+           EMPTY CART
+           ================================ */
+
+        .empty-cart {
+            text-align: center;
+            background: white;
+            padding: 60px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        .empty-cart-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+
+        .empty-cart h2 {
+            margin-bottom: 10px;
+        }
+
+
+        .empty-cart p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+
+        .shop-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #111;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+
+        /* ================================
+           MOBILE
+           ================================ */
+
+        @media (max-width: 800px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .order-summary {
+                position: static;
+            }
+
+
+            .cart-item {
+                flex-wrap: wrap;
+            }
+
+
+            .cart-product-info {
+                min-width: 180px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+
+<header>
+
+    <h1>
+        💪 GYM SUPPLEMENT STORE
+    </h1>
+
+    <p>
+        Fuel Your Fitness. Build Your Strength.
+    </p>
+
+    <nav>
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+        <a href="{{ url_for('cart') }}">
+            🛒 Cart
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            📊 Dashboard
+        </a>
+
+        <a href="{{ url_for('admin') }}">
+            🔐 Admin
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==========================================
+     CART PAGE
+     ========================================== -->
+
+<div class="cart-page">
+
+
+    <div class="cart-title">
+
+        <h2>
+            🛒 Your Shopping Cart
+        </h2>
+
+        <p>
+            Review your supplements before checkout.
+        </p>
+
+    </div>
+
+
+
+    {% if items %}
+
+
+    <div class="cart-layout">
+
+
+        <!-- ======================================
+             CART ITEMS
+             ====================================== -->
+
+        <div>
+
+
+            <div class="cart-items">
+
+
+                {% for item in items %}
+
+
+                <div class="cart-item">
+
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <div class="cart-product-image">
+
+                        {% if item["product_name"]|lower in
+                           ["whey protein"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/whey.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "Creatine" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/creatine.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "BCAA" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/bcaa.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "Pre Workout" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/preworkout.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "Mass Gainer" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/massgainer.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "Glutamine" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/glutamine.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% elif "Fish Oil" in item["product_name"] %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='images/fishoil.jpg'
+                                ) }}"
+                                alt="{{ item['product_name'] }}"
+                            >
+
+                        {% else %}
+
+                            🥤
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- PRODUCT INFO -->
+
+                    <div class="cart-product-info">
+
+                        <h3>
+                            {{ item["product_name"] }}
+                        </h3>
+
+                        <p>
+                            ₹{{ "%.2f"|format(item["price"]) }}
+                            each
+                        </p>
+
+
+                        <a
+                            href="{{ url_for(
+                                'remove',
+                                cart_id=item['id']
+                            ) }}"
+                            class="remove-btn"
+                        >
+                            🗑 Remove
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="quantity-box">
+
+                        <a
+                            href="{{ url_for(
+                                'decrease',
+                                cart_id=item['id']
+                            ) }}"
+                        >
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                            >
+                                −
+                            </button>
+
+                        </a>
+
+
+                        <span class="quantity-number">
+
+                            {{ item["quantity"] }}
+
+                        </span>
+
+
+                        <a
+                            href="{{ url_for(
+                                'increase',
+                                cart_id=item['id']
+                            ) }}"
+                        >
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                            >
+                                +
+                            </button>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- ITEM TOTAL -->
+
+                    <div class="cart-price">
+
+                        ₹{{
+                            "%.2f"|format(
+                                item["price"] * item["quantity"]
+                            )
+                        }}
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+
+            <!-- CART ACTIONS -->
+
+            <div class="cart-actions">
+
+                <a
+                    href="/"
+                    class="continue-shopping"
+                >
+                    ← Continue Shopping
+                </a>
+
+
+                <a
+                    href="{{ url_for('clear_cart') }}"
+                    class="clear-cart"
+                >
+                    🗑 Clear Cart
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             ORDER SUMMARY
+             ====================================== -->
+
+        <div class="order-summary">
+
+
+            <h2>
+                🧾 Order Summary
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    ₹{{ "%.2f"|format(total) }}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span class="delivery-free">
+                    FREE
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Discount
+                </span>
+
+                <span>
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <span>
+                    ₹{{ "%.2f"|format(total) }}
+                </span>
+
+            </div>
+
+
+          <form action="{{ url_for('checkout') }}" method="GET">
+
+    <button
+        type="submit"
+        class="checkout-btn"
+    >
+        💳 Proceed to Checkout
+    </button>
+
+</form>  
+
+        </div>
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- ======================================
+         EMPTY CART
+         ====================================== -->
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+            🛒
+        </div>
+
+        <h2>
+            Your Cart is Empty
+        </h2>
+
+        <p>
+            Looks like you haven't added
+            any supplements yet.
+        </p>
+
+
+        <a
+            href="/"
+            class="shop-btn"
+        >
+            🥤 Start Shopping
+        </a>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+
+<footer>
+
+    <h3>
+        💪 Gym Supplement Store
+    </h3>
+
+    <p>
+        Your fitness. Your strength. Your journey.
+    </p>
+
+    <p>
+        © 2026 Gym Supplement Store
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

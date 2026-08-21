@@ -1,0 +1,1050 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+
+/* HEADER */
+
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 10px;
+}
+
+
+/* NAVIGATION */
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff9800;
+}
+
+
+/* CONTAINER */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 0;
+}
+
+
+/* HERO */
+
+.hero {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    font-size: 36px;
+}
+
+
+/* SEARCH */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.search-form button {
+    padding: 12px 20px;
+    border: none;
+    background: #ff9800;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* CATEGORIES */
+
+.categories {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.categories a {
+    display: inline-block;
+    margin: 6px;
+    padding: 10px 15px;
+    background: white;
+    color: #222;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px #ccc;
+}
+
+.categories a:hover {
+    background: #ff9800;
+    color: white;
+}
+
+
+/* PRODUCTS */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+
+/* CARD */
+
+.card {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.products .card {
+    margin: 0;
+}
+
+
+/* PRODUCT IMAGE */
+
+.product-image {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 210px;
+    object-fit: contain;
+}
+
+
+/* PRICE */
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+
+/* STOCK */
+
+.stock {
+    font-weight: bold;
+}
+
+
+/* BUTTON */
+
+/* ============================= */
+/* CLEAN PRODUCT BUTTONS */
+/* ============================= */
+
+.card {
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Product buttons */
+
+.card .cart-button {
+    display: inline-block;
+
+    width: auto;
+    min-width: 120px;
+
+    padding: 9px 16px;
+
+    margin: 6px 4px;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+/* View Product button */
+
+.card a:first-of-type .cart-button {
+    background: #eeeeee;
+    color: #222;
+}
+
+
+/* Add to Cart button */
+
+.card a:last-of-type .cart-button {
+    background: #222;
+    color: white;
+}
+
+
+/* Hover */
+
+.card .cart-button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+
+/* ============================= */
+/* CATEGORY BUTTONS */
+/* ============================= */
+
+.categories {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin: 20px 0 30px;
+}
+
+
+.categories a {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    background: #f1f1f1;
+
+    color: #333;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    border: 1px solid #ddd;
+
+    transition: 0.2s;
+}
+
+
+.categories a:hover {
+    background: #222;
+
+    color: white;
+
+    border-color: #222;
+}
+
+
+/* ============================= */
+/* SEARCH BAR */
+/* ============================= */
+
+.search-form {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 15px 0;
+}
+
+
+.search-form input {
+    width: 280px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.search-form button {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.search-form button:hover {
+    opacity: 0.85;
+}
+
+
+/* ============================= */
+/* PRODUCT IMAGE */
+/* ============================= */
+
+.product-image {
+    width: 100%;
+
+    height: 200px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+
+.product-image img {
+    max-width: 170px;
+
+    max-height: 190px;
+
+    object-fit: contain;
+}
+
+
+/* ============================= */
+/* PRODUCT PRICE */
+/* ============================= */
+
+.price {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin: 10px 0;
+}
+
+
+.stock {
+    font-size: 13px;
+
+    color: #666;
+
+    margin-bottom: 10px;
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    .categories {
+        gap: 6px;
+    }
+
+    .categories a {
+        font-size: 12px;
+
+        padding: 6px 11px;
+    }
+
+    .card .cart-button {
+        min-width: 105px;
+
+        padding: 8px 12px;
+
+        font-size: 13px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form input {
+        width: 90%;
+    }
+
+}
+
+/* WHY US */
+
+.why-us {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px #ccc;
+}
+
+.feature-icon {
+    font-size: 35px;
+}
+
+
+/* ABOUT */
+
+.about-us {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 40px 0;
+}
+
+
+/* CONTACT */
+
+.contact-us {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+}
+/* =====================================================
+   DASHBOARD
+   ===================================================== */
+
+.dashboard-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+
+.dashboard-card {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.08);
+}
+
+
+.dashboard-card h2 {
+
+    margin: 10px 0;
+
+}
+
+
+.chart-box {
+
+    width: 100%;
+
+    height: 500px;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.08);
+
+    box-sizing: border-box;
+
+}
+
+
+.prediction-info {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.08);
+}
+
+
+.prediction-value {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin: 15px 0;
+
+}
+
+
+@media (max-width: 800px) {
+
+    .dashboard-cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .dashboard-cards {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+/* =====================================================
+   PROFESSIONAL WORKOUT SECTION
+   ===================================================== */
+
+.workout-section {
+    margin: 50px 0;
+}
+
+
+/* HEADING */
+
+.workout-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.workout-heading h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.workout-heading p {
+    color: #666;
+    font-size: 16px;
+}
+
+
+/* IMAGE GRID */
+
+.workout-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* IMAGE CARD */
+
+.workout-card {
+    position: relative;
+
+    height: 280px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background: #111;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* IMAGE */
+
+.workout-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+/* DARK OVERLAY */
+
+.workout-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+
+    background:
+        linear-gradient(
+            transparent 35%,
+            rgba(0, 0, 0, 0.85)
+        );
+}
+
+
+/* TEXT */
+
+.workout-overlay {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 22px;
+
+    color: white;
+
+    z-index: 2;
+}
+
+.workout-overlay h3 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+}
+
+.workout-overlay p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* HOVER EFFECT */
+
+.workout-card:hover img {
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   MOBILE WORKOUT SECTION
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+    .workout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .workout-card {
+        height: 250px;
+    }
+
+    .workout-heading h2 {
+        font-size: 24px;
+    }
+
+}
+/* =====================================================
+   PROFESSIONAL GYM HEADER
+   ===================================================== */
+
+.main-header {
+
+    position: relative;
+
+    min-height: 330px;
+
+    background-image:
+        url("/static/images/gym-header.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    color: white;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* DARK OVERLAY */
+
+.main-header::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background:
+        rgba(0, 0, 0, 0.68);
+
+}
+
+
+/* HEADER CONTENT */
+
+.header-overlay {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding: 45px 20px;
+}
+
+
+/* TITLE */
+
+.main-header h1 {
+
+    margin: 0;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,0.7);
+}
+
+
+/* SUBTITLE */
+
+.main-header p {
+
+    margin: 12px 0 22px;
+
+    font-size: 17px;
+
+    color: #f2f2f2;
+}
+
+
+/* NAVIGATION */
+
+.main-header nav {
+
+    margin-top: 20px;
+
+}
+
+
+.main-header nav a {
+
+    display: inline-block;
+
+    color: white;
+
+    text-decoration: none;
+
+    margin: 5px 8px;
+
+    padding: 9px 15px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+.main-header nav a:hover {
+
+    background: #ff9800;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .main-header {
+
+        min-height: 350px;
+
+    }
+
+    .main-header h1 {
+
+        font-size: 27px;
+
+    }
+
+    .main-header p {
+
+        font-size: 14px;
+
+    }
+
+    .main-header nav a {
+
+        font-size: 13px;
+
+        padding: 8px 10px;
+
+        margin: 3px;
+
+    }
+
+}
+/* =====================================================
+   ADMIN ORDERS TABLE
+   ===================================================== */
+
+.orders-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+
+    margin-top: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.orders-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+
+/* TABLE SCROLL */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* TABLE */
+
+.orders-table {
+    width: 100%;
+    min-width: 1100px;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+
+/* HEADER */
+
+.orders-table th {
+    background: #111;
+    color: white;
+
+    padding: 14px 12px;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+
+/* CELLS */
+
+.orders-table td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #eee;
+
+    vertical-align: middle;
+}
+
+
+/* HOVER */
+
+.orders-table tbody tr:hover {
+    background: #f8f8f8;
+}
+
+
+/* ORDER ID */
+
+.orders-table td:first-child {
+    font-weight: bold;
+    color: #ff4d00;
+}
+
+
+/* AMOUNT */
+
+.orders-table .amount {
+    font-weight: bold;
+    color: #ff4d00;
+
+    white-space: nowrap;
+}
+
+
+/* DELETE BUTTON */
+
+.delete-btn {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    background: #e53935;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background: #c62828;
+}
+
+
+/* NO ORDERS */
+
+.no-orders {
+    text-align: center !important;
+
+    padding: 30px !important;
+
+    color: #777;
+
+    font-weight: bold;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        Order Successful
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        💪 Gym Supplement Store
+    </h1>
+
+</header>
+
+
+<div class="container">
+
+    <div class="success-box">
+
+        <h1>
+            ✅ Order Successfully Placed!
+        </h1>
+
+
+        <h2>
+            Order #{{ order["id"] }}
+        </h2>
+
+
+        <hr>
+
+
+        <h3>
+            👤 Customer Details
+        </h3>
+
+
+        <p>
+            <strong>Name:</strong>
+            {{ order["customer_name"] }}
+        </p>
+
+
+        <p>
+            <strong>Mobile:</strong>
+            {{ order["mobile"] }}
+        </p>
+
+
+        <p>
+            <strong>Address:</strong>
+            {{ order["address"] }}
+        </p>
+
+
+        <h3>
+            🛒 Ordered Products
+        </h3>
+
+
+        {% for item in items %}
+
+        <p>
+
+            {{ item["product_name"] }}
+
+            ×
+
+            {{ item["quantity"] }}
+
+            =
+
+            ₹{{ "%.2f"|format(
+                item["price"] * item["quantity"]
+            ) }}
+
+        </p>
+
+        {% endfor %}
+
+
+        <h2>
+
+            Total:
+
+            ₹{{ "%.2f"|format(
+                order["total_amount"]
+            ) }}
+
+        </h2>
+
+
+        <a href="/">
+
+            <button class="cart-button">
+                🏠 Back to Store
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 Gym Supplement Store
+    </p>
+
+</footer>
+
+</body>
+
+</html>

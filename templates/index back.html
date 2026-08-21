@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Gym Supplement Store</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>💪 GYM SUPPLEMENT STORE</h1>
+
+    <p>
+        Fuel Your Fitness. Build Your Strength.
+    </p>
+
+    <nav>
+
+        <a href="/">🏠 Home</a>
+
+        <a href="/cart">🛒 Cart</a>
+
+        <a href="/dashboard">📊 Dashboard</a>
+
+        <a href="/admin">🔐 Admin</a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+    <!-- Hero Section -->
+
+<div class="hero">
+
+    <h2>💪 BUILD YOUR BEST VERSION</h2>
+
+    <p>
+        Premium gym supplements for strength,
+        recovery and performance.
+    </p>
+
+    <a href="#products">
+
+        <button class="cart-button">
+            🛒 Shop Supplements
+        </button>
+
+    </a>
+
+</div>
+
+    <h2>🥤 Our Gym Supplements</h2>
+    <form action="/" method="GET" class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search supplements..."
+        value="{{ search }}"
+    >
+
+    <button type="submit">
+        🔍 Search
+    </button>
+
+</form>
+<div class="categories">
+
+    <a href="/">All</a>
+
+    <a href="/?search=Whey">🥛 Protein</a>
+
+    <a href="/?search=Creatine">⚡ Creatine</a>
+
+    <a href="/?search=Pre Workout">🔥 Pre-Workout</a>
+
+    <a href="/?search=BCAA">💪 BCAA</a>
+
+    <a href="/?search=Mass Gainer">🏋️ Mass Gainer</a>
+
+</div>
+<footer><!-- Why Choose Us -->
+
+<section class="why-us">
+
+    <h2>💪 Why Choose Our Store?</h2>
+
+    <div class="features">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🥇
+            </div>
+
+            <h3>Quality Products</h3>
+
+            <p>
+                Carefully selected supplements
+                for your fitness journey.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <h3>Fast Delivery</h3>
+
+            <p>
+                Get your supplements delivered
+                quickly and safely.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>Best Prices</h3>
+
+            <p>
+                Affordable supplements
+                for every fitness goal.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <h3>Secure Shopping</h3>
+
+            <p>
+                Your customer information
+                is handled securely.
+            </p>
+
+        </div>
+
+    </div>
+
+</section> <!-- About Us -->
+<section class="about-us" style="display:block !important; visibility:visible !important;">
+
+    <h2 style="display:block !important; visibility:visible !important;">
+        🏋️ About Gym Supplement Store
+    </h2>
+
+    <p style="display:block !important; visibility:visible !important;">
+        Welcome to our Gym Supplement Store.
+        We provide a range of fitness supplements
+        including Whey Protein, Creatine, BCAA,
+        Pre Workout, Mass Gainer and Glutamine.
+    </p>
+
+    <p style="display:block !important; visibility:visible !important;">
+        Our goal is to provide quality fitness products
+        at affordable prices and make your shopping
+        experience simple, easy and convenient.
+    </p>
+
+</section>
+<section class="contact-us">
+
+    <h2>📞 Contact Us</h2>
+
+    <div class="contact-details">
+
+        <div>
+            <h3>📱 Phone</h3>
+            <p>+91 98765 43210</p>
+        </div>
+
+        <div>
+            <h3>📧 Email</h3>
+            <p>gymsupplementstore@gmail.com</p>
+        </div>
+
+        <div>
+            <h3>📍 Address</h3>
+            <p>Maharashtra, India</p>
+        </div>
+
+    </div>
+
+</section>
+    <p style="text-align:center;">
+        Quality supplements for your fitness journey.
+    </p>
+
+    <br>
+
+
+    <div class="products" id="products">
+
+        {% for product in products %}
+
+        <div class="card">
+
+            
+
+            <h3>
+                {{ product[1] }}
+            </h3>
+<div class="product-image">
+
+    {% if "Whey" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/whey.jpg') }}"
+             alt="Whey Protein">
+
+    {% elif "Creatine" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/creatine.jpg') }}"
+             alt="Creatine">
+
+    {% elif "BCAA" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/bcaa.jpg') }}"
+             alt="BCAA">
+
+    {% elif "Pre Workout" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/preworkout.jpg') }}"
+             alt="Pre Workout">
+
+    {% elif "Mass Gainer" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/massgainer.jpg') }}"
+             alt="Mass Gainer">
+
+    {% elif "Glutamine" in product[1] %}
+
+        <img src="{{ url_for('static', filename='images/glutamine.jpg') }}"
+             alt="Glutamine">
+
+    {% endif %}
+
+</div>
+
+            <p>
+
+                {% if "Whey" in product[1] %}
+
+                    High-quality protein for muscle recovery.
+
+                {% elif "Creatine" in product[1] %}
+
+                    Supports strength and workout performance.
+
+                {% elif "BCAA" in product[1] %}
+
+                    Helps support muscle recovery.
+
+                {% elif "Pre Workout" in product[1] %}
+
+                    Supports energy and workout performance.
+
+                {% elif "Mass Gainer" in product[1] %}
+
+                    Helps increase calorie and protein intake.
+
+                {% elif "Glutamine" in product[1] %}
+
+                    Supports recovery after training.
+
+                {% else %}
+
+                    Premium gym supplement.
+
+                {% endif %}
+
+            </p>
+
+
+            <div class="price">
+
+                ₹{{ product[2] }}
+
+            </div>
+
+
+            <p class="stock">
+
+                Stock Available:
+                {{ product[3] }}
+
+            </p>
+
+
+            <a href="/add_to_cart/{{ product[0] }}">
+
+                <button class="cart-button">
+
+                    🛒 Add to Cart
+
+                </button>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <h3>💪 Gym Supplement Store</h3>
+
+    <p>
+        Your fitness. Your strength. Your journey.
+    </p>
+
+    <p>
+        © 2026 Gym Supplement Store
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
