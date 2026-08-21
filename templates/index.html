@@ -15,6 +15,132 @@
         href="{{ url_for('static', filename='style.css') }}"
     >
 
+    <style>
+
+        /* =====================================================
+           PROFESSIONAL WORKOUT SECTION
+           ===================================================== */
+
+        .workout-section {
+            margin: 50px 0;
+        }
+
+        .workout-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .workout-heading h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .workout-heading p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .workout-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .workout-card {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #111;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .workout-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+        .workout-card::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+            background:
+                linear-gradient(
+                    transparent 30%,
+                    rgba(0, 0, 0, 0.9)
+                );
+        }
+
+        .workout-overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 22px;
+
+            color: white;
+
+            z-index: 2;
+        }
+
+        .workout-overlay h3 {
+            margin: 0 0 8px;
+
+            font-size: 21px;
+        }
+
+        .workout-overlay p {
+            margin: 0;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .workout-card:hover img {
+            transform: scale(1.08);
+        }
+
+
+        /* =====================================================
+           MOBILE WORKOUT SECTION
+           ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .workout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workout-card {
+                height: 250px;
+            }
+
+            .workout-heading h2 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
@@ -22,43 +148,39 @@
 
 
 <!-- =====================================================
-     HEADER WITH GYM IMAGE
+     HEADER
      ===================================================== -->
 
-<header class="main-header">
+<header>
 
-    <div class="header-overlay">
+    <h1>
+        💪 GYM SUPPLEMENT STORE
+    </h1>
 
-        <h1>
-            💪 GYM SUPPLEMENT STORE
-        </h1>
-
-        <p>
-            Fuel Your Fitness. Build Your Strength.
-        </p>
+    <p>
+        Fuel Your Fitness. Build Your Strength.
+    </p>
 
 
-        <nav>
+    <nav>
 
-            <a href="/">
-                🏠 Home
-            </a>
+        <a href="/">
+            🏠 Home
+        </a>
 
-            <a href="{{ url_for('cart') }}">
-                🛒 Cart
-            </a>
+        <a href="{{ url_for('cart') }}">
+            🛒 Cart
+        </a>
 
-            <a href="{{ url_for('dashboard') }}">
-                📊 Dashboard
-            </a>
+        <a href="{{ url_for('dashboard') }}">
+            📊 Dashboard
+        </a>
 
-            <a href="{{ url_for('admin') }}">
-                🔐 Admin
-            </a>
+        <a href="{{ url_for('admin') }}">
+            🔐 Admin
+        </a>
 
-        </nav>
-
-    </div>
+    </nav>
 
 </header>
 
@@ -100,6 +222,132 @@
 
 
     <!-- =================================================
+         WORKOUT / FITNESS SECTION
+         ================================================= -->
+
+    <section class="workout-section">
+
+
+        <div class="workout-heading">
+
+            <h2>
+                🏋️ TRAIN HARD. RECOVER BETTER.
+            </h2>
+
+            <p>
+                Your training deserves the right nutrition.
+                Power your workouts with quality supplements.
+            </p>
+
+        </div>
+
+
+
+        <div class="workout-grid">
+
+
+            <!-- =========================================
+                 WORKOUT IMAGE 1
+                 ========================================= -->
+
+            <div class="workout-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/workout1.jpg'
+                    ) }}"
+                    alt="Strength Training"
+                >
+
+
+                <div class="workout-overlay">
+
+                    <h3>
+                        💪 BUILD STRENGTH
+                    </h3>
+
+                    <p>
+                        Push your limits and become
+                        stronger every day.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 WORKOUT IMAGE 2
+                 ========================================= -->
+
+            <div class="workout-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/workout2.jpg'
+                    ) }}"
+                    alt="Fitness Training"
+                >
+
+
+                <div class="workout-overlay">
+
+                    <h3>
+                        🔥 TRAIN HARD
+                    </h3>
+
+                    <p>
+                        Stay consistent and give your
+                        workout your best.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 WORKOUT IMAGE 3
+                 ========================================= -->
+
+            <div class="workout-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/workout3.jpg'
+                    ) }}"
+                    alt="Muscle Training"
+                >
+
+
+                <div class="workout-overlay">
+
+                    <h3>
+                        ⚡ PERFORM BETTER
+                    </h3>
+
+                    <p>
+                        Support your performance with
+                        proper nutrition.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
          PRODUCTS SECTION
          ================================================= -->
 
@@ -111,7 +359,9 @@
 
 
 
-        <!-- SEARCH -->
+        <!-- =============================================
+             SEARCH
+             ============================================= -->
 
         <form
             action="{{ url_for('home') }}"
@@ -126,6 +376,7 @@
                 value="{{ search }}"
             >
 
+
             <button type="submit">
                 🔍 Search
             </button>
@@ -134,9 +385,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =============================================
              CATEGORIES
-             ================================================= -->
+             ============================================= -->
 
         <div class="categories">
 
@@ -172,9 +423,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =============================================
              PRODUCTS
-             ================================================= -->
+             ============================================= -->
 
         <div class="products">
 
@@ -212,10 +463,12 @@
 
 
 
-                    <!-- DESCRIPTION -->
+                    <!-- PRODUCT DESCRIPTION -->
 
                     <p>
+
                         {{ product["description"] }}
+
                     </p>
 
 
@@ -237,6 +490,7 @@
                         {% if product["stock"] > 0 %}
 
                             Stock Available:
+
                             <strong>
                                 {{ product["stock"] }}
                             </strong>
@@ -253,7 +507,9 @@
 
 
 
-                    <!-- BUTTONS -->
+                    <!-- =================================
+                         BUTTONS
+                         ================================= -->
 
                     <div class="product-buttons">
 
@@ -323,9 +579,9 @@
             {% else %}
 
 
-                <!-- =================================================
+                <!-- =================================
                      NO PRODUCTS
-                     ================================================= -->
+                     ================================= -->
 
                 <div class="empty-products">
 
